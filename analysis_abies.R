@@ -10,18 +10,10 @@ source("load_libraries_abies.R")
 
 set.seed(123) # set seeds 
 
-#######################################################################################################
-# clean working area
-
-cat("\014") 
-
 ################################################################################
 # Loading data of GCMS data ( Areas) and seeds
 
-dati_sel=readRDS("dati_sel_abies.rds") # data relative to seeds
-dati_seeds=read.xlsx("dati_abies_seeds.xlsx",1) # data relative to seeds
-
-
+dati_sel=readRDS("dati_sel_abies.rds") # data relative to terpenes
 cat("\014") 
 
 ################################################################################
@@ -44,7 +36,7 @@ names(dati_sel)  # vedere i nomi delle matrici
 nrow(dati_sel) #  170
 
 #######################################################################################################
-# Data normalization
+# Data standardization
 
 dati_sel_rel=100*dati_sel[,4:31]/dati_sel$`TOT_mono&sesqui`
 
@@ -52,18 +44,18 @@ mat_final_rel=data.frame(species=dati_sel$Species,dati_sel_rel)
 
 write.xlsx(mat_final_rel,"dati_relativi_totali.xlsx",overwrite = T) 
 
-################################################################################
+###################################
 #  monoTh AND  sesquiTh separated
 
 dati_monosesqui=cbind(100*dati_sel[,4:18]/dati_sel$TOT_Mono,100*dati_sel[,19:31]/(dati_sel$`TOT_mono&sesqui`-dati_sel$TOT_Mono))
 
+###################################
 # only  monoTh on monothtot and sesquiTh on the sum to underweight sesqui
-
 
 dati_monosesquimiche=cbind(100*dati_sel[,4:18]/dati_sel$TOT_Mono,100*dati_sel[,19:31]/(dati_sel$`TOT_mono&sesqui`))
 
 ##########################################################################
-# Creazione delle matrici di analisi per PCA
+# set up data for PCA
 ##########################################################################
 
 dati_sel_rel=dati_monosesquimiche # PCA on full data normalized matrix
@@ -79,7 +71,6 @@ Y=dati_sel$Species
 # PCA explore variable and outlier detection
 
 data_pca=data.frame(X,Species=Y)
-
 
 abies_pca=ordinate(data_pca , cols = 1:25, model = ~ prcomp(., scale. = TRUE)) 
 
@@ -157,8 +148,9 @@ write.xlsx(list(dunn_test=res_df_dunn,
 # summary tables
 
 my_desc=psych::describeBy(mat_final_rel[,-1], mat_final_rel$species)
-
-write_excel_csv2(rbindlist(my_desc, idcol = 'species'), file = 'summary_terpene_by_species.xlsx')
+table_terpene=rbindlist(my_desc, idcol = 'species')
+table_terpene$vars=rownames(my_desc_seed$`Abies alba`)[table_terpene$vars]
+write_excel_csv2(table_terpene, file = 'summary_terpene_by_species.xlsx')
 
 
 ######################################################################################
@@ -224,7 +216,7 @@ setwd("..")
 
 
 ####################################################################################
-# Ordination Supervised methods : LDA & & KNN
+# Ordination Supervised methods : LDA 
 
 # LDA
 # Prior probabilities of groups: the proportion of training observations in each group. 
@@ -234,8 +226,8 @@ setwd("..")
 
 ##############################################################################################################################
 #############################################################################################################################
-# checking collinearity by Condition Number for obtain data selected for next LDA procedure
-# why?
+# checking collinearity by Condition Number and VIF <10 to obtain selected data for the next LDA procedure
+
 # Multicollinearity means that your predictors are correlated. Why is this bad?
 #   
 # Because LDA, like regression techniques involves computing a matrix inversion, which is inaccurate 
@@ -245,9 +237,6 @@ setwd("..")
 # be compensated by a change in X2 and you will underestimate the effect of X1 on Y.
 # In LDA, you would underestimate the effect of X1 on the classification.
 ########################################################################################################
-
-
-
 
 dati_sel_rel=dati_monosesquimiche
 
@@ -274,16 +263,20 @@ model <- lda(Y~., data =dati_train)
 
 predictions_lda <- model %>% predict(dati_test)
 model_accuracy_lda=mean(predictions_lda$class==dati_test$Y)
+
+
 res_lda_abiesGC=confusionMatrix(predictions_lda$class,factor(dati_test$Y))
 
 print(xtable(res_lda_abiesGC$table), type = "html",file="confusion_matrix.docx")
+
 print(xtable(res_lda_abiesGC$byClass), type = "html",file="index_classification.docx")
+
 res_lda_abiesGC$overall
 res_lda_abiesGC
 
 
 ###########################################################################################################################################
-# plots LDA
+# plots LDA by using ordr
 
 abies_lda <- lda_ord(X, Y, axes.scale = "standardized")
 abies_lda %>%
@@ -308,7 +301,9 @@ ggsave("LDA_biplot.png")
 
 
 ################################################################################
-# Now working on data seeds
+# Now we are going to work on data matrix seeds
+
+dati_seeds=read.xlsx("dati_abies_seeds.xlsx",1) # data relative to seeds
 
 
 Xseed=dati_seeds[,4:8]
