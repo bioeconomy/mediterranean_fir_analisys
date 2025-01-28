@@ -149,7 +149,7 @@ write.xlsx(list(dunn_test=res_df_dunn,
 
 my_desc=psych::describeBy(mat_final_rel[,-1], mat_final_rel$species)
 table_terpene=rbindlist(my_desc, idcol = 'species')
-table_terpene$vars=rownames(my_desc_seed$`Abies alba`)[table_terpene$vars]
+table_terpene$vars=rownames(my_desc$`Abies alba`)[table_terpene$vars]
 write_excel_csv2(table_terpene, file = 'summary_terpene_by_species.xlsx')
 
 
