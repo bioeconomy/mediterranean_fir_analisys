@@ -2,7 +2,7 @@
 # load libraries
 
 #######################################################################################################
-# To perform packages' installation before to run code please use pkg::pkg_install function available in R packages install.packages("pkg")
+# before to run code you have to install R packages:  please use pkg::pkg_install function available in R packages pkg # install.packages("pkg")
 
 
 library(tidyverse)
