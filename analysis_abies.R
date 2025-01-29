@@ -168,33 +168,42 @@ dir.create("boxplot_sel")
 
 setwd("boxplot_sel")
 
-# [1] "a-pinene"            
-ggboxplot(dati_sel_box,"species",names(dati_sel_box)[1],fill="red") +ylim(0,50)+ylab(paste0(names(dati_sel_box)[1]," (%)"))
-ggsave(paste0("boxplot_",names(dati_sel_box)[1],".png"))
-# "b-pinene"            
-ggboxplot(dati_sel_box,"species",names(dati_sel_box)[3],fill="red") +ylim(0,50)+ylab(paste0(names(dati_sel_box)[3]," (%)"))
-ggsave(paste0("boxplot_",names(dati_sel_box)[3],".png"))
+setwd("boxplot_sel")
 
-# "Limonene"
-ggboxplot(dati_sel_box,"species",names(dati_sel_box)[5],fill="red") +ylim(20,90)+ylab(paste0(names(dati_sel_box)[5]," (%)"))
-ggsave(paste0("boxplot_",names(dati_sel_box)[5],".png"))
+# [1] "a-pinene"    
+dati_sel_box_short=dati_sel_box
+dati_sel_box_short$species
+levels(dati_sel_box_short$species)<-c("A. Alba","A. nebrodensis","A. pinsapo")
 
-# [4] "p-cymene"
-ggboxplot(dati_sel_box,"species",names(dati_sel_box)[8],fill="red") +ylim(0,3)+ylab(paste0(names(dati_sel_box)[8]," (%)"))
-ggsave(paste0("boxplot_",names(dati_sel_box)[8],".png"))
+names(dati_sel_box_short)[1]="a.Pinene"
+ggboxplot(dati_sel_box_short,"species",names(dati_sel_box_short)[1],fill="red") +ylim(0,50)+ylab(paste0(names(dati_sel_box_short)[1]," (%)"))
+ggsave(paste0("boxplot_",names(dati_sel_box_short)[1],".png"),width = 4,height = 3.5)
+names(dati_sel_box_short)[3]="b.Pinene"            
+ggboxplot(dati_sel_box_short,"species",names(dati_sel_box_short)[3],fill="red") +ylim(0,50)+ylab(paste0(names(dati_sel_box_short)[3]," (%)"))
+ggsave(paste0("boxplot_",names(dati_sel_box_short)[3],".png"),width = 4,height = 3.5)
 
-# "sesquiterpeni.1"  
-ggboxplot(dati_sel_box,"species",names(dati_sel_box)[17],fill="red") +ylim(0,5)+ylab(paste0(names(dati_sel_box)[17]," (%)"))
-ggsave(paste0("boxplot_",names(dati_sel_box)[17],".png"))
+names(dati_sel_box_short)[5]="Limonene"
+ggboxplot(dati_sel_box_short,"species",names(dati_sel_box_short)[5],fill="red") +ylim(20,90)+ylab(paste0(names(dati_sel_box_short)[5]," (%)"))
+ggsave(paste0("boxplot_",names(dati_sel_box_short)[5],".png"),width = 4,height = 3.5)
+
+# [4] "p-Cymene"
+ggboxplot(dati_sel_box_short,"species",names(dati_sel_box_short)[8],fill="red") +ylim(0,3)+ylab(paste0(names(dati_sel_box_short)[8]," (%)"))
+ggsave(paste0("boxplot_",names(dati_sel_box)[8],".png"),width = 3.5,height = 3.5)
+
+names(dati_sel_box_short)[17]="Sesquiterpeni.1"  
+ggboxplot(dati_sel_box_short,"species",names(dati_sel_box_short)[17],fill="red") +ylim(0,5)+ylab(paste0(names(dati_sel_box_short)[17]," (%)"))
+ggsave(paste0("boxplot_",names(dati_sel_box_short)[17],".png"),width = 4,height = 3.5)
 
 # "1.Germacrene.D-4-ol"
-ggboxplot(dati_sel_box,"species",names(dati_sel_box)[23],fill="red") +ylim(0,50)+ylab(paste0(names(dati_sel_box)[23]," (%)"))
-ggsave(paste0("boxplot_",names(dati_sel_box)[23],".png"))
+names(dati_sel_box_short)[23]="Germacrene.D.4.ol"  
+ggboxplot(dati_sel_box_short,"species",names(dati_sel_box_short)[23],fill="red") +ylim(0,50)+ylab(paste0(names(dati_sel_box_short)[23]," (%)"))
+ggsave(paste0("boxplot_",names(dati_sel_box_short)[23],".png"),width = 4,height = 3.5)
 
 # [7] "Selina-6-en-4-o
+names(dati_sel_box_short)[25]="Selina.6.en.4.ol"
+ggboxplot(dati_sel_box_short,"species",names(dati_sel_box_short)[25],fill="red") +ylim(0,50)+ylab(paste0(names(dati_sel_box_short)[25]," (%)"))
+ggsave(paste0("boxplot_",names(dati_sel_box_short)[25],".png"),width = 4,height = 3.5)
 
-ggboxplot(dati_sel_box,"species",names(dati_sel_box)[25],fill="red") +ylim(0,50)+ylab(paste0(names(dati_sel_box)[25]," (%)"))
-ggsave(paste0("boxplot_",names(dati_sel_box)[25],".png"))
 
 setwd("..")
 
