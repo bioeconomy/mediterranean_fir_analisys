@@ -96,11 +96,14 @@ a=multiCol(dati_sel_rel, graf = TRUE)
 
 id_VIF=which(names(dati_sel_rel) %in% c("b-elemene","1.Germacrene.D-4-ol","GermacreneD") ==T)
 
-dati_sel_rel_LDA=dati_sel_rel[, -id_VIF]
+dati_sel_rel_LDA=dati_sel_rel[, -id_VIF] # selected data for LDA
 
 CN(dati_sel_rel_LDA) 
 multiCol(dati_sel_rel_LDA, graf = TRUE)
 
+# Collinearity well explained
+
+# https://stats.stackexchange.com/questions/70899/what-correlation-makes-a-matrix-singular-and-what-are-implications-of-singularit
 ##########################################################################
 
 dati_sel_rel=dati_monosesquimiche 
