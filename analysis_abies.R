@@ -104,6 +104,8 @@ multiCol(dati_sel_rel_LDA, graf = TRUE)
 # Collinearity well explained
 
 # https://stats.stackexchange.com/questions/70899/what-correlation-makes-a-matrix-singular-and-what-are-implications-of-singularit
+# https://math.stackexchange.com/questions/2120542/48-reasons-why-a-matrix-is-singular
+# https://stackoverflow.com/questions/62573178/pca-lda-analysis-r
 ##########################################################################
 
 dati_sel_rel=dati_monosesquimiche 
