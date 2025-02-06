@@ -1,11 +1,10 @@
 ##########################################################################
-# load libraries
+# install libraries
 
 #######################################################################################################
 # before to run code you have to install R packages:  
 # please use pkg::pkg_install function available in R packages pkg 
 # install.packages("pkg")
-
 
 library(tidyverse)
 library(ggplot2)
@@ -26,9 +25,14 @@ library(caret)
 library(Rmisc)
 library(readr)
 library(FactoMineR)
-
+library(gtsummary)
+library(MASS)
+# library(folda)
 ########################################################################
+# to install ggord
 
+# options(repos = c(fawda123 = 'https://fawda123.r-universe.dev',CRAN = 'https://cloud.r-project.org'))
+# install.packages('ggord')
 
 ############################################################################################
 # functions
