@@ -14,7 +14,7 @@ set.seed(123) # set seeds
 # Loading data of GCMS data ( Areas) and seeds
 
 ################################################################################
-# To achieve  reproducibility setup word dir where data are stored.
+# To achieve  reproducibility setup work dir where data are stored.
 
  setwd("")
 
