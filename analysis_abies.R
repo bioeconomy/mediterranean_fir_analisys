@@ -481,7 +481,7 @@ PCA_final_abies_seeds <- factoextra::fviz_pca_biplot(ord,
   theme(legend.position = "bottom") +
   theme(legend.box = "vertical")
 
-ggsave(filename="PCA_abies_seeds novel.png")
+ggsave(PCA_final_abies_seeds,filename="PCA_biplot_seeds.png")
 
 ################################################################################
 # LDA seeds
