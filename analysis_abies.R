@@ -121,7 +121,7 @@ Y=dati_sel$Species
 # X=asin(sqrt(X/100)) # eventuale trasfomazione dei dati normalizzati 
 
 
-Xseed=dati_seeds[,4:8]
+Xseed=dati_seeds[,4:7]
 Yseed=dati_seeds$species
 
 write.xlsx(list(data.frame(Y,X),data.frame(Yseed,Xseed)),"dati_PCA.xlsx")
@@ -437,6 +437,9 @@ ggsave("LDA_biplot.png")
 # Ora sto lavorando sui dati dei semi
 
 # kruskal wallis
+
+Xseed=dati_seeds[,4:7]
+Yseed=dati_seeds$species
 
 col_oneway_welch(Xseed, Yseed) # utilizzo il pacchetto MatrixTests per fare l'ANOVA a 1 via 
 
