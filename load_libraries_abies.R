@@ -3,8 +3,8 @@
 
 #######################################################################################################
 # before to run code you have to install R packages:  
-# please use pkg::pkg_install function available in R packages pkg 
-# install.packages("pkg")
+# please use pak::pkg_install function available in R packages pkg 
+# install.packages("pak")
 
 library(tidyverse)
 library(ggplot2)
